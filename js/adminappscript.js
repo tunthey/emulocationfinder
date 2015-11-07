@@ -29,7 +29,7 @@ function authenticate()
 		console.log(formData);
 		 $.ajax({
         type:'POST',
-        url: 'http://location.falcontechng.com/adminlogin.php',
+        url: 'http://localhost:81/emumapservice/adminlogin.php',
         crossDomain: true,
         data:formData,
 		cache:false,
@@ -125,7 +125,7 @@ function logout()
 
 function loadcourseoptions()
 {
-	var dataurl = 'http://location.falcontechng.com/loadcourseoptions.php';
+	var dataurl = 'http://localhost:81/emumapservice/loadcourseoptions.php';
 	$.ajax({
 			    url: dataurl,
 			    timeout: 5000,
@@ -157,7 +157,7 @@ function loadcourseoptions()
 
 function loadcoursecat()
 {
-    var dataurl = 'http://location.falcontechng.com/course_cat.php';
+    var dataurl = 'http://localhost:81/emumapservice/course_cat.php';
     $.ajax({
                 url: dataurl,
                 timeout: 5000,
@@ -225,7 +225,7 @@ function addcourse()
                     });
          $.ajax({
         type:'POST',
-        url: 'http://location.falcontechng.com/addnewcourse.php',
+        url: 'http://localhost:81/emumapservice/addnewcourse.php',
         data:formData,
         cache:false,
        // contentType: false,
@@ -291,7 +291,7 @@ function addcource_category()
         console.log(formData);
          $.ajax({
         type:'POST',
-        url: 'http://location.falcontechng.com/add_course_cat.php',
+        url: 'http://localhost:81/emumapservice/add_course_cat.php',
          crossDomain: true,
         data:formData,
         cache:false,
@@ -347,7 +347,7 @@ function loadcourseinfo()
     else
     {
         $('#ccodefordelte').val(ccode);
-        var dataurl = "http://location.falcontechng.com/loadupdatecourse.php?c_code=" + ccode;
+        var dataurl = "http://localhost:81/emumapservice/loadupdatecourse.php?c_code=" + ccode;
             $.ajax({
                 url: dataurl,
                 timeout: 5000,
@@ -400,7 +400,7 @@ function loadcoursebasicinfo()
     else
     {
         $('#ccodefordelte').val(ccode);
-        var dataurl = "http://location.falcontechng.com/loadupdatecourse.php?c_code=" + ccode;
+        var dataurl = "http://localhost:81/emumapservice/loadupdatecourse.php?c_code=" + ccode;
             $.ajax({
                 url: dataurl,
                 timeout: 5000,
@@ -479,7 +479,7 @@ function updatecourse()
 
          $.ajax({
         type:'POST',
-        url: 'http://location.falcontechng.com/updatecourse.php',
+        url: 'http://localhost:81/emumapservice/updatecourse.php',
         data:formData,
         cache:false,
        // contentType: false,
@@ -537,7 +537,7 @@ function deletecourse()
                     });
      $.ajax({
         type:'POST',
-        url: 'http://location.falcontechng.com/delete_course.php?coursecode=' + coursecode,
+        url: 'http://localhost:81/emumapservice/delete_course.php?coursecode=' + coursecode,
 
         success:function(data){
             console.log(data);
@@ -580,7 +580,7 @@ function loadstaffinfo(){
     else
     {
         $('#stafemaildelete').val(ccode);
-        var dataurl = "http://location.falcontechng.com/loadupdatestaff.php?staffemail=" + ccode;
+        var dataurl = "http://localhost:81/emumapservice/loadupdatestaff.php?staffemail=" + ccode;
             $.ajax({
                 url: dataurl,
                 timeout: 5000,
@@ -652,7 +652,7 @@ function updatestaffinfoaction(){
                     });
          $.ajax({
         type:'POST',
-        url: 'http://location.falcontechng.com/updatestaff.php',
+        url: 'http://localhost:81/emumapservice/updatestaff.php',
         data:formData,
         cache:false,
        // contentType: false,
@@ -702,7 +702,7 @@ function loadstaffbasicinfo(){
     else
     {
         $('#estafemaildelete').val(ccode);
-        var dataurl = "http://location.falcontechng.com/loadupdatestaff.php?staffemail=" + ccode;
+        var dataurl = "http://localhost:81/emumapservice/loadupdatestaff.php?staffemail=" + ccode;
             $.ajax({
                 url: dataurl,
                 timeout: 5000,
@@ -757,7 +757,7 @@ function findstafftodelete(){
     else
     {
         $('#staffemailfordelte').val(ccode);
-        var dataurl = "http://location.falcontechng.com/loadupdatestaff.php?staffemail=" + ccode;
+        var dataurl = "http://localhost:81/emumapservice/loadupdatestaff.php?staffemail=" + ccode;
             $.ajax({
                 url: dataurl,
                 timeout: 5000,
@@ -814,7 +814,7 @@ function deletestaffinfo(){
                     });
      $.ajax({
         type:'POST',
-        url: 'http://location.falcontechng.com/delete_staff.php?email=' + stafemail,
+        url: 'http://localhost:81/emumapservice/delete_staff.php?email=' + stafemail,
 
         success:function(data){
             console.log(data);
@@ -857,7 +857,7 @@ function hddiv()
 
  function loadannouncementlist(){
     $('#updateannocemnt').hide();
-    var dataurl = "http://location.falcontechng.com/mistery.php";
+    var dataurl = "http://localhost:81/emumapservice/mistery.php";
             $.ajax({
                 url: dataurl,
                 timeout: 5000,
@@ -905,7 +905,7 @@ function showupdateannuocementform()
     if(value==="Select"){
        return;
     }
-    var dataurl = "http://location.falcontechng.com/loadannoucemnt.php?id=" + value;
+    var dataurl = "http://localhost:81/emumapservice/loadannoucemnt.php?id=" + value;
             $.ajax({
                 url: dataurl,
                 timeout: 5000,
@@ -967,7 +967,7 @@ function deleteannoucemt(){
                     });
      $.ajax({
         type:'POST',
-        url: 'http://location.falcontechng.com/delete_announcment.php?id=' + id,
+        url: 'http://localhost:81/emumapservice/delete_announcment.php?id=' + id,
 
         success:function(data){
             console.log(data);
@@ -1006,7 +1006,7 @@ function deleteannoucemt(){
 
 function loadactitylist(){
      $('#updateactivity').hide();
-    var dataurl = "http://location.falcontechng.com/loadactivitytlist.php";
+    var dataurl = "http://localhost:81/emumapservice/loadactivitytlist.php";
             $.ajax({
                 url: dataurl,
                 timeout: 5000,
@@ -1053,7 +1053,7 @@ function showupdateactivityform(){
     if(value==="Select"){
        return;
     }
-    var dataurl = "http://location.falcontechng.com/loadactivity.php?id=" + value;
+    var dataurl = "http://localhost:81/emumapservice/loadactivity.php?id=" + value;
             $.ajax({
                 url: dataurl,
                 timeout: 5000,
@@ -1112,7 +1112,7 @@ function deleteactvity(){
                     });
      $.ajax({
         type:'POST',
-        url: 'http://location.falcontechng.com/delete_activity.php?id=' + id,
+        url: 'http://localhost:81/emumapservice/delete_activity.php?id=' + id,
 
         success:function(data){
             console.log(data);
@@ -1148,7 +1148,7 @@ function deleteactvity(){
     }  
 }
 function loadalbumdeletelist(){
-       var dataurl = "http://location.falcontechng.com/loadalbumlist.php";
+       var dataurl = "http://localhost:81/emumapservice/loadalbumlist.php";
             $.ajax({
                 url: dataurl,
                 timeout: 5000,
@@ -1201,7 +1201,7 @@ function deletealbum(id){
                     });
      $.ajax({
         type:'POST',
-        url: 'http://location.falcontechng.com/delete_album.php?albulmid=' + id,
+        url: 'http://localhost:81/emumapservice/delete_album.php?albulmid=' + id,
 
         success:function(data){
             console.log(data);
@@ -1236,7 +1236,7 @@ function deletealbum(id){
     }  
 }
 function loadalbumlist(){
-     var dataurl = "http://location.falcontechng.com/loadalbumlist.php";
+     var dataurl = "http://localhost:81/emumapservice/loadalbumlist.php";
             $.ajax({
                 url: dataurl,
                 timeout: 5000,
@@ -1291,7 +1291,7 @@ function loadalbumlist(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/add_cafeteria.php',
+                    url: 'http://localhost:81/emumapservice/add_cafeteria.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -1335,7 +1335,7 @@ $("form#add_buildingform").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/add_building.php',
+                    url: 'http://localhost:81/emumapservice/add_building.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -1379,7 +1379,7 @@ $("form#add_officeform").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/add_office.php',
+                    url: 'http://localhost:81/emumapservice/add_office.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -1425,7 +1425,7 @@ $("form#add_atmform").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/add_atm.php',
+                    url: 'http://localhost:81/emumapservice/add_atm.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -1470,7 +1470,7 @@ $("form#add_atmform").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/add_lecturehall.php',
+                    url: 'http://localhost:81/emumapservice/add_lecturehall.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -1514,7 +1514,7 @@ $("form#add_atmform").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/update_staff_photo.php',
+                    url: 'http://localhost:81/emumapservice/update_staff_photo.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -1558,7 +1558,7 @@ $("form#add_atmform").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/add_annoucemnt.php',
+                    url: 'http://localhost:81/emumapservice/add_annoucemnt.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -1602,7 +1602,7 @@ $("form#add_atmform").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/add_activity.php',
+                    url: 'http://localhost:81/emumapservice/add_activity.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -1647,7 +1647,7 @@ $("form#add_atmform").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/update_annoucemnt.php',
+                    url: 'http://localhost:81/emumapservice/update_annoucemnt.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -1691,7 +1691,7 @@ $("form#add_atmform").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/update_activity.php',
+                    url: 'http://localhost:81/emumapservice/update_activity.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -1736,7 +1736,7 @@ $("form#add_atmform").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/add_album.php',
+                    url: 'http://localhost:81/emumapservice/add_album.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -1785,7 +1785,7 @@ $("form#add_atmform").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/add_picture_to_album.php',
+                    url: 'http://localhost:81/emumapservice/add_picture_to_album.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -1829,7 +1829,7 @@ $("form#add_atmform").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/add_new_admin.php',
+                    url: 'http://localhost:81/emumapservice/add_new_admin.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -1874,7 +1874,7 @@ $("form#add_atmform").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/reset_password.php',
+                    url: 'http://localhost:81/emumapservice/reset_password.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -1921,7 +1921,7 @@ $("form#add_atmform").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/change_adminpass.php',
+                    url: 'http://localhost:81/emumapservice/change_adminpass.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -1966,7 +1966,7 @@ $("form#add_atmform").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/update_cafe_photo.php',
+                    url: 'http://localhost:81/emumapservice/update_cafe_photo.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -2010,7 +2010,7 @@ $("form#upload_buildingphoto").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/update_building_photo.php',
+                    url: 'http://localhost:81/emumapservice/update_building_photo.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -2055,7 +2055,7 @@ $("form#upload_libraryphoto").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/update_library_photo.php',
+                    url: 'http://localhost:81/emumapservice/update_library_photo.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -2101,7 +2101,7 @@ $("form#upload_libraryphoto").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/update_lecture.php',
+                    url: 'http://localhost:81/emumapservice/update_lecture.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -2143,7 +2143,7 @@ $("form#upload_libraryphoto").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/update_library.php',
+                    url: 'http://localhost:81/emumapservice/update_library.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -2185,7 +2185,7 @@ $("form#upload_libraryphoto").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/update_sport.php',
+                    url: 'http://localhost:81/emumapservice/update_sport.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -2226,7 +2226,7 @@ $("form#upload_libraryphoto").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/update_church.php',
+                    url: 'http://localhost:81/emumapservice/update_church.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -2268,7 +2268,7 @@ $("form#upload_libraryphoto").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/update_mosque.php',
+                    url: 'http://localhost:81/emumapservice/update_mosque.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -2310,7 +2310,7 @@ $("form#upload_libraryphoto").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/update_office.php',
+                    url: 'http://localhost:81/emumapservice/update_office.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -2351,7 +2351,7 @@ $("form#upload_libraryphoto").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/update_atm.php',
+                    url: 'http://localhost:81/emumapservice/update_atm.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -2393,7 +2393,7 @@ $("form#upload_libraryphoto").submit(function(){
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/update_building.php',
+                    url: 'http://localhost:81/emumapservice/update_building.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -2449,7 +2449,7 @@ function update_cafe(id){
                     });
         $.ajax({
         type:'POST',
-        url: 'http://location.falcontechng.com/update_cafeteria.php',
+        url: 'http://localhost:81/emumapservice/update_cafeteria.php',
         data:formData,
         cache:false,
        // contentType: false,
@@ -2563,7 +2563,7 @@ function get_mosque_position(){
 }
 
 function load_all_lecture_for_delete(){
-     var dataurl = 'http://location.falcontechng.com/list_all_lecture_hall.php';
+     var dataurl = 'http://localhost:81/emumapservice/list_all_lecture_hall.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -2602,7 +2602,7 @@ function load_all_lecture_for_delete(){
 }
 
 function load_all_atm_for_delete(){
-     var dataurl = 'http://location.falcontechng.com/list_all_atm.php';
+     var dataurl = 'http://localhost:81/emumapservice/list_all_atm.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -2643,7 +2643,7 @@ function load_all_atm_for_delete(){
 
 
 function load_all_office_for_delete(){
-     var dataurl = 'http://location.falcontechng.com/list_all_office.php';
+     var dataurl = 'http://localhost:81/emumapservice/list_all_office.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -2685,7 +2685,7 @@ function load_all_office_for_delete(){
 
 
 function load_all_cafe_for_delete() {
-     var dataurl = 'http://location.falcontechng.com/list_all_cafeteria.php';
+     var dataurl = 'http://localhost:81/emumapservice/list_all_cafeteria.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -2726,7 +2726,7 @@ function load_all_cafe_for_delete() {
 
 
 function load_all_building_for_delete() {
-     var dataurl = 'http://location.falcontechng.com/list_all_building.php';
+     var dataurl = 'http://localhost:81/emumapservice/list_all_building.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -2776,7 +2776,7 @@ function delete_cafeteria(id){
                     });
      $.ajax({
         type:'GET',
-        url: 'http://location.falcontechng.com/delete_cafeteria.php?id=' + id,
+        url: 'http://localhost:81/emumapservice/delete_cafeteria.php?id=' + id,
 
         success:function(data){
             console.log(data);
@@ -2824,7 +2824,7 @@ function delete_building(id){
                     });
      $.ajax({
         type:'GET',
-        url: 'http://location.falcontechng.com/delete_building.php?id=' + id,
+        url: 'http://localhost:81/emumapservice/delete_building.php?id=' + id,
 
         success:function(data){
             console.log(data);
@@ -2872,7 +2872,7 @@ function delete_lecture(id){
                     });
      $.ajax({
         type:'GET',
-        url: 'http://location.falcontechng.com/delete_lecture.php?id=' + id,
+        url: 'http://localhost:81/emumapservice/delete_lecture.php?id=' + id,
 
         success:function(data){
             console.log(data);
@@ -2919,7 +2919,7 @@ function delete_atm(id){
                     });
      $.ajax({
         type:'GET',
-        url: 'http://location.falcontechng.com/delete_atm.php?id=' + id,
+        url: 'http://localhost:81/emumapservice/delete_atm.php?id=' + id,
 
         success:function(data){
             console.log(data);
@@ -2967,7 +2967,7 @@ function delete_office(id){
                     });
      $.ajax({
         type:'GET',
-        url: 'http://location.falcontechng.com/delete_office.php?id=' + id,
+        url: 'http://localhost:81/emumapservice/delete_office.php?id=' + id,
 
         success:function(data){
             console.log(data);
@@ -3004,7 +3004,7 @@ function delete_office(id){
 
 
 function load_all_cafe_for_cover() {
-     var dataurl = 'http://location.falcontechng.com/list_all_cafeteria.php';
+     var dataurl = 'http://localhost:81/emumapservice/list_all_cafeteria.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -3044,7 +3044,7 @@ function load_all_cafe_for_cover() {
 
 
 function load_all_building_for_cover() {
-     var dataurl = 'http://location.falcontechng.com/list_all_building.php';
+     var dataurl = 'http://localhost:81/emumapservice/list_all_building.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -3085,7 +3085,7 @@ function load_all_building_for_cover() {
 
 
 function load_all_lecture(){
-    var dataurl = 'http://location.falcontechng.com/list_all_lecture_hall.php';
+    var dataurl = 'http://localhost:81/emumapservice/list_all_lecture_hall.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -3125,7 +3125,7 @@ function load_all_lecture(){
 
 
 function load_all_office(){
-    var dataurl = 'http://location.falcontechng.com/list_all_office.php';
+    var dataurl = 'http://localhost:81/emumapservice/list_all_office.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -3165,7 +3165,7 @@ function load_all_office(){
 
 
 function load_all_atm(){
-    var dataurl = 'http://location.falcontechng.com/list_all_atm.php';
+    var dataurl = 'http://localhost:81/emumapservice/list_all_atm.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -3204,7 +3204,7 @@ function load_all_atm(){
 }
 
 function load_all_building(){
-    var dataurl = 'http://location.falcontechng.com/list_all_building.php';
+    var dataurl = 'http://localhost:81/emumapservice/list_all_building.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -3245,7 +3245,7 @@ function load_all_building(){
 
 
 function load_all_cafe() {
-     var dataurl = 'http://location.falcontechng.com/list_all_cafeteria.php';
+     var dataurl = 'http://localhost:81/emumapservice/list_all_cafeteria.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -3284,7 +3284,7 @@ function load_all_cafe() {
 }
 
 function load_lecture_details(id){
-    var dataurl = 'http://location.falcontechng.com/get_lecture_details.php?id='+id;
+    var dataurl = 'http://localhost:81/emumapservice/get_lecture_details.php?id='+id;
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -3328,7 +3328,7 @@ function load_lecture_details(id){
 
 
 function load_office_details(id){
-    var dataurl = 'http://location.falcontechng.com/get_office_details.php?id='+id;
+    var dataurl = 'http://localhost:81/emumapservice/get_office_details.php?id='+id;
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -3373,7 +3373,7 @@ function load_office_details(id){
 
 
 function load_atm_details(id){
-    var dataurl = 'http://location.falcontechng.com/get_atm_details.php?id='+id;
+    var dataurl = 'http://localhost:81/emumapservice/get_atm_details.php?id='+id;
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -3416,7 +3416,7 @@ function load_atm_details(id){
 
 
 function load_building_details(id){
-    var dataurl = 'http://location.falcontechng.com/get_building_details.php?id='+id;
+    var dataurl = 'http://localhost:81/emumapservice/get_building_details.php?id='+id;
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -3460,7 +3460,7 @@ function load_building_details(id){
 
 
 function load_library_details(){
-    var dataurl = 'http://location.falcontechng.com/get_library_details.php';
+    var dataurl = 'http://localhost:81/emumapservice/get_library_details.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -3505,7 +3505,7 @@ function load_library_details(){
 
 
 function load_gym_details(){
-    var dataurl = 'http://location.falcontechng.com/get_gym_details.php';
+    var dataurl = 'http://localhost:81/emumapservice/get_gym_details.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -3548,7 +3548,7 @@ function load_gym_details(){
 
 
 function load_church_details(){
-    var dataurl = 'http://location.falcontechng.com/get_church_details.php';
+    var dataurl = 'http://localhost:81/emumapservice/get_church_details.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -3591,7 +3591,7 @@ function load_church_details(){
 
 
 function load_mosque_details(){
-    var dataurl = 'http://location.falcontechng.com/get_mosque_details.php';
+    var dataurl = 'http://localhost:81/emumapservice/get_mosque_details.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -3634,7 +3634,7 @@ function load_mosque_details(){
 
 
 function load_cafe_details(id){
-     var dataurl = 'http://location.falcontechng.com/get_cafeteria_details.php?id='+id;
+     var dataurl = 'http://localhost:81/emumapservice/get_cafeteria_details.php?id='+id;
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -3674,7 +3674,7 @@ function load_cafe_details(id){
 
 
 function load_cafe_details_for_photo(id){
-     var dataurl = 'http://location.falcontechng.com/get_cafeteria_details.php?id='+id;
+     var dataurl = 'http://localhost:81/emumapservice/get_cafeteria_details.php?id='+id;
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -3715,7 +3715,7 @@ function load_cafe_details_for_photo(id){
 
 
 function load_building_details_for_photo(id){
-     var dataurl = 'http://location.falcontechng.com/get_building_details.php?id='+id;
+     var dataurl = 'http://localhost:81/emumapservice/get_building_details.php?id='+id;
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -3754,7 +3754,7 @@ function load_building_details_for_photo(id){
 }
 
 function load_library_details_for_cover(){
-     var dataurl = 'http://location.falcontechng.com/get_library_details.php';
+     var dataurl = 'http://localhost:81/emumapservice/get_library_details.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,

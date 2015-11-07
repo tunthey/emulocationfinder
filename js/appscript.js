@@ -1,5 +1,4 @@
-$(function() {
- 
+$(function() { 
 
     $("form#add_review_form").submit(function(){
                 var formData = new FormData($(this)[0]);
@@ -11,7 +10,7 @@ $(function() {
                  textVisible: true
                     });
                 $.ajax({
-                    url: 'http://location.falcontechng.com/add_review.php',
+                    url: 'http://localhost:81/emumapservice/add_review.php',
                     type: 'POST',
                     data: formData,
                    // async: false,
@@ -144,7 +143,7 @@ function set_my_details(position){
           my_location_lnt= position.coords.longitude;
         }
         function startWatching() {
-            watchID = geo.getCurrentPosition(show_map, geo_error, {
+            watchID = geo.watchPosition(show_map, geo_error, {
                 enableHighAccuracy: HIGHACCURACY,
                 maximumAge: MAXIMUM_AGE,
                 timeout: TIMEOUT
@@ -169,7 +168,7 @@ function where_im_i(){
 
 function handle_current_location_settings(){
      if((geo = getGeoLocation())) {
-        startWatching()
+        startWatching();
                //handle_processsing();
             } else {
                 alert('Geolocation not supported.')
@@ -181,7 +180,7 @@ function load_search_building(){
         alert('Please enter the name of Building to search');
     else{
         var building_name = $('#building_name_search').val();
-        var dataurl = 'http://location.falcontechng.com/list_search_building.php?name='+building_name;
+        var dataurl = 'http://localhost:81/emumapservice/list_search_building.php?name='+building_name;
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -231,7 +230,7 @@ function load_search_computer_lab(){
         alert('Please enter the Lab name to search');
     else{
         var lab_name = $('#computer_name_search').val();
-        var dataurl = 'http://location.falcontechng.com/list_search_computer_lab.php?name='+lab_name;
+        var dataurl = 'http://localhost:81/emumapservice/list_search_computer_lab.php?name='+lab_name;
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -281,7 +280,7 @@ function load_search_office() {
         alert('Please enter the Office number to search');
     else{
         var office_name = $('#office_no_search').val();
-        var dataurl = 'http://location.falcontechng.com/list_search_office.php?office_no='+office_name;
+        var dataurl = 'http://localhost:81/emumapservice/list_search_office.php?office_no='+office_name;
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -323,12 +322,61 @@ function load_search_office() {
             });
     }
 }
+
+function load_search_lec_hall(){
+   if($('#lechall_name_search').val()=='')
+        alert('Please enter the name of Lecture Hall to search');
+    else{
+        var lec_name = $('#lechall_name_search').val();
+        var dataurl = 'http://localhost:81/emumapservice/list_search_lecturehall.php?name='+lec_name;
+    $.ajax({
+                url: dataurl,
+                //timeout: 5000,
+                beforeSend: function() {
+                $.mobile.loading('show', {
+                 theme: "a",
+                 text: "Processing Request... please wait",
+                 textonly: true,
+                 textVisible: true
+                    }); 
+                },
+                error: function(jqXHR, textStatus) {
+                    console.log(textStatus);
+                    $.mobile.loading('hide');
+                    redirect_to('#errorpage');
+                },
+
+                fail: function(jqXHR, textStatus, errorThrown){
+                    $.mobile.loading('hide');
+                    console.log(textStatus);
+                    redirect_to('#errorpage');
+                },
+
+                success: function (jsondata) {
+                    $.mobile.loading('hide');
+                    if(jsondata.length>0){
+                    $('#lecture_hall_content_listing_area').html('<ul data-theme="b" data-role="listview">');
+                       for (var i = 0; i < jsondata.length; i++) {
+                       $('#lecture_hall_content_listing_area').append('<li data-theme="b"><a href="#" onclick="load_lecture_hall_details('+jsondata[i].lecture_hall.id+')">'+jsondata[i].lecture_hall.name+'</a></li>');
+                       }
+                       $('#lecture_hall_content_listing_area').append('</ul>');
+                         $('#lecture_hall_content_listing_area').listview().listview('refresh');
+                    redirect_to('#lecture_hall_list');
+                    }
+                    else
+                        alert('No Record Found!');
+                }
+            });
+    }
+}
+
+
 function load_search_cafeteria() {
     if($('#cafe_name_search').val()=='')
         alert('Please enter the name of cafeteria to search');
     else{
         var cafe_name = $('#cafe_name_search').val();
-        var dataurl = 'http://location.falcontechng.com/list_search_cafeteria.php?name='+cafe_name;
+        var dataurl = 'http://localhost:81/emumapservice/list_search_cafeteria.php?name='+cafe_name;
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -373,7 +421,7 @@ function load_search_cafeteria() {
 }
 
 function load_all_building() {
-  var dataurl = 'http://location.falcontechng.com/list_all_building.php';
+  var dataurl = 'http://localhost:81/emumapservice/list_all_building.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -402,7 +450,7 @@ function load_all_building() {
                     $('#building_content_listing_area').html('<ul data-theme="b" data-role="listview">');
                        for (var i = 0; i < jsondata.length; i++) {
                        $('#building_content_listing_area').append('<li data-theme="b"><a href="#" onclick="load_building_details('+jsondata[i].building_list.id+')">'+jsondata[i].building_list.name+'</a></li>');
-                      console.log();
+                      
                        }
                        $('#building_content_listing_area').append('</ul>');
                          $('#building_content_listing_area').listview().listview('refresh');
@@ -414,8 +462,9 @@ function load_all_building() {
 }
 
 function load_all_lec_hall(){
-   var dataurl = 'http://location.falcontechng.com/list_all_lecture_hall.php';
+   var dataurl = 'http://localhost:81/emumapservice/list_all_lecture_hall.php';
     $.ajax({
+      
                 url: dataurl,
                 //timeout: 5000,
                 beforeSend: function() {
@@ -454,7 +503,7 @@ function load_all_lec_hall(){
 }
 
 function load_all_cafeteria(){
-    var dataurl = 'http://location.falcontechng.com/list_all_cafeteria.php';
+    var dataurl = 'http://localhost:81/emumapservice/list_all_cafeteria.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -483,7 +532,7 @@ function load_all_cafeteria(){
                     $('#cafeteria_content_listing_area').html('<ul data-theme="b" data-role="listview">');
                        for (var i = 0; i < jsondata.length; i++) {
                        $('#cafeteria_content_listing_area').append('<li data-theme="b"><a href="#" onclick="load_cafeteria_details('+jsondata[i].cafeteria_list.id+')">'+jsondata[i].cafeteria_list.name+'</a></li>');
-                      console.log();
+                      
                        }
                        $('#cafeteria_content_listing_area').append('</ul>');
                          $('#cafeteria_content_listing_area').listview().listview('refresh');
@@ -495,7 +544,7 @@ function load_all_cafeteria(){
 }
 
 function load_all_computer_lab(){
-  var dataurl = 'http://location.falcontechng.com/list_all_computer_lab.php';
+  var dataurl = 'http://localhost:81/emumapservice/list_all_computer_lab.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -536,7 +585,7 @@ function load_all_computer_lab(){
 }
 
 function load_all_office(){
-    var dataurl = 'http://location.falcontechng.com/list_all_office.php';
+    var dataurl = 'http://localhost:81/emumapservice/list_all_office.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -578,7 +627,7 @@ function load_all_office(){
 
 
 function load_lecture_hall_details(id){
-  var dataurl = 'http://location.falcontechng.com/get_lecture_hall_details.php?id='+id;
+  var dataurl = 'http://localhost:81/emumapservice/get_lecture_hall_details.php?id='+id;
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -616,7 +665,7 @@ function load_lecture_hall_details(id){
             });
 }
 function load_office_details(id){
-   var dataurl = 'http://location.falcontechng.com/get_office_details.php?id='+id;
+   var dataurl = 'http://localhost:81/emumapservice/get_office_details.php?id='+id;
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -695,7 +744,7 @@ function getlibrary_info(){
 }
 
 function load_building_details(id){
-  var dataurl = 'http://location.falcontechng.com/get_building_details.php?id='+id;
+  var dataurl = 'http://localhost:81/emumapservice/get_building_details.php?id='+id;
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -735,7 +784,7 @@ function load_building_details(id){
 
 
 function load_gym_details(){
-  var dataurl = 'http://location.falcontechng.com/get_gym_details.php';
+  var dataurl = 'http://localhost:81/emumapservice/get_gym_details.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -775,7 +824,7 @@ function load_gym_details(){
 
 
 function load_church_details(){
-  var dataurl = 'http://location.falcontechng.com/get_church_details.php';
+  var dataurl = 'http://localhost:81/emumapservice/get_church_details.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -815,7 +864,7 @@ function load_church_details(){
 
 
 function load_mosque_details(){
-  var dataurl = 'http://location.falcontechng.com/get_mosque_details.php';
+  var dataurl = 'http://localhost:81/emumapservice/get_mosque_details.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -841,7 +890,7 @@ function load_mosque_details(){
 
                 success: function (jsondata) {
                     $.mobile.loading('hide');
-                    $('#church_details_area').html('');
+                    $('#mosque_details_area').html('');
                        for (var i = 0; i < jsondata.length; i++) {
                        $('#mosque_details_area').append('<img src="'+jsondata[i].mosque_list.cover_pics+'" alt="Mosque Cover Picture" class="banner"><p>'+jsondata[i].mosque_list.brief_info+'</p><div class="ui-grid-a"><div class="ui-block-a"><p>Opening Hour</p></div><div class="ui-block-b"><p>'+jsondata[i].mosque_list.opening_hour+'</p></div><div class="ui-block-a"><p>Closing Hour</p></div><div class="ui-block-b"><p>'+jsondata[i].mosque_list.closing_hour+'</p></div><button class="ui-btn" onclick="getmylocation('+jsondata[i].mosque_list.lat+','+jsondata[i].mosque_list.lng+')" >Get Direction</button>');
                        }
@@ -855,7 +904,7 @@ function load_mosque_details(){
 
 
 function load_computer_details(id){
-   var dataurl = 'http://location.falcontechng.com/get_computer_details.php?id='+id;
+   var dataurl = 'http://localhost:81/emumapservice/get_computer_details.php?id='+id;
     $.ajax({
         url: dataurl,
         //timeout: 5000,
@@ -891,7 +940,8 @@ function load_computer_details(id){
     });
 }
 function load_cafeteria_details(id){
-     var dataurl = 'http://location.falcontechng.com/get_cafeteria_details.php?id='+id;
+   // var cafe_rating = getcafeterial_rating(id);
+     var dataurl = 'http://localhost:81/emumapservice/get_cafeteria_details.php?id='+id;
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -916,10 +966,11 @@ function load_cafeteria_details(id){
                 },
 
                 success: function (jsondata) {
+                    //console.log(jsondata.avg_rating);
                     $.mobile.loading('hide');
                     $('#cafeteria_details_area').html('');
                        for (var i = 0; i < jsondata.length; i++) {
-                       $('#cafeteria_details_area').append('<img src="'+jsondata[i].cafeteria_list.cover_pics+'" alt="Cafeteria Cover Picture" class="banner"><p>'+jsondata[i].cafeteria_list.brief_info+'</p><button class="ui-btn" onclick="getmylocation('+jsondata[i].cafeteria_list.lat+','+jsondata[i].cafeteria_list.lng+')" >Get Direction</button>');
+                       $('#cafeteria_details_area').append('<img src="'+jsondata[i].cafeteria_list.cover_pics+'" alt="Cafeteria Cover Picture" class="banner">Ratings: '+getcafeterial_rating(jsondata[i].avg_rating)+' <p>'+jsondata[i].cafeteria_list.brief_info+'</p><button class="ui-btn" onclick="getmylocation('+jsondata[i].cafeteria_list.lat+','+jsondata[i].cafeteria_list.lng+')" >Get Direction</button>');
                        $('#review_cafeteria_id').val(jsondata[i].cafeteria_list.id);
                        }
                       // $('#cgdb').button();
@@ -930,8 +981,25 @@ function load_cafeteria_details(id){
             });
 }
 
+function getcafeterial_rating(message){
+    ratings ='No ratings yet!';
+    message = Math.round(message);
+    console.log(message);
+    if(message=='1')
+     ratings = '✭';
+    else if(message=='2')
+     ratings = '✭✭';
+    else if(message=='3')
+     ratings = '✭✭✭';
+    else if(message=='4')
+     ratings =  '✭✭✭✭';
+    else if(message=='5')
+     ratings = '✭✭✭✭✭';
+    return ratings;
+}
+
 function load_atm_list(){
-   var dataurl = 'http://location.falcontechng.com/list_all_atm.php';
+   var dataurl = 'http://localhost:81/emumapservice/list_all_atm.php';
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -961,7 +1029,7 @@ function load_atm_list(){
                     $('#atm_count').html(jsondata.length);
                        for (var i = 0; i < jsondata.length; i++) {
                         $('#atmlist').append('<div data-role="collapsible"><h1>'+jsondata[i].atm_list.name+'</h1><p><div class="content" class="ui-content"><div class="ui-grid-a"><div class="ui-block-a"><p>Currency available</p></div><div class="ui-block-b"><p>'+jsondata[i].atm_list.currency+'</p></div><div class="ui-block-a"><p>Brief Info</p></div><div class="ui-block-b"><p>'+jsondata[i].atm_list.info+'</p></div></div><button onclick="getmylocation('+jsondata[i].atm_list.lat+','+jsondata[i].atm_list.lng+')" class="ui-btn">Get Direction</button></p></div></div>');
-                      console.log();
+                      
                        }
                       $('#atmlist').find('div[data-role=collapsible]').collapsible({refresh:true});
                       $('#atmloading').hide();
@@ -976,7 +1044,7 @@ function load_atm_list(){
 
 function load_review_list(){
    var id = $('#review_cafeteria_id').val();
-   var dataurl = 'http://location.falcontechng.com/list_all_review.php?id=' + id;
+   var dataurl = 'http://localhost:81/emumapservice/list_all_review.php?id=' + id;
     $.ajax({
                 url: dataurl,
                 //timeout: 5000,
@@ -1001,15 +1069,28 @@ function load_review_list(){
                 },
 
                 success: function (jsondata) {
+                  console.log(jsondata);
+                  console.log(jsondata.length);
+                  if(jsondata.length>0){
+                    console.log("im running this!");
                     $.mobile.loading('hide');
                     $('#reviewlist').html('');
                     $('#review_count').html(jsondata.length);
                        for (var i = 0; i < jsondata.length; i++) {
-                        $('#reviewlist').append('<div data-role="collapsible"><h1>'+jsondata[i].review_list.review_title+'</h1><p>'+jsondata[i].review_list.reviewer_name+' gave this cafeteria '+jsondata[i].review_list.rating_scale+' stars and said <br> <i> &quot;'+jsondata[i].review_list.review+'&quot; </i> <br> Review date: '+jsondata[i].review_list.date_added+'</p></div></div>');
+                        $('#reviewlist').append('<div data-role="collapsible"><h1>'+jsondata[i].review_list.review_title+'</h1><p>'+jsondata[i].review_list.reviewer_name+' gave this cafeteria '+getcafeterial_rating(jsondata[i].review_list.rating_scale)+' stars and said <br> <i> &quot;'+jsondata[i].review_list.review+'&quot; </i> <br> Review date: '+jsondata[i].review_list.date_added+'</p></div></div>');
                        }
                       $('#reviewlist').find('div[data-role=collapsible]').collapsible({refresh:true});
                       $('#reviewloading').hide();
-                    redirect_to('#review_details');     
+                    redirect_to('#review_details');
+                  }
+                  else
+                  { 
+                    $('#no_review_yet').html("No Reviews yet for the Cafeteria. Be the first to comment!");
+                    $.mobile.loading('hide');
+                    $('#reviews_Avail').html('');
+                    redirect_to('#review_details');
+                  }
+
                 }
 
 
@@ -1076,11 +1157,17 @@ function show_your_location() {
             }
         }
 function getmp() {
-            watchID = geo.getCurrentPosition(show_cordinates, geo_error, {
+    if((geo = getGeoLocation())) {
+               watchID = geo.watchPosition(show_cordinates, geo_error, {
                 enableHighAccuracy: HIGHACCURACY,
                 maximumAge: MAXIMUM_AGE,
                 timeout: TIMEOUT
             });
+            } else {
+                alert('Geolocation not supported.')
+            }
+
+            
         }
 function getmylocation (lat,lng) {
     // body...
@@ -1107,7 +1194,6 @@ current_dest_lat = lat;
 current_dest_lnt = lng;
 var dest = new google.maps.LatLng(lat, lng);
 makedirectionrequest(pos,dest,1,"direction_map_loc");
-
  // show_your_location();
   $.mobile.loading('hide');
   redirect_to('#directions_map');
@@ -1123,7 +1209,8 @@ makedirectionrequest(pos,dest,1,"direction_map_loc");
 // Try HTML5 geolocation
   
 function makedirectionrequest(pos,dest,mode,mapdiv_id){
-
+alert(pos);
+alert(dest);
   directionsDisplay = new google.maps.DirectionsRenderer();
   //var cyprus = new google.maps.LatLng(35.1439106, 33.909568);
   var mapOptions = {
@@ -1195,7 +1282,7 @@ makedirectionrequest(pos,dest,sopton,"direction_map_loc");
 }
 
 function download_manual(){
-	window.open("http://location.falcontechng.com/user_manual.php","_system");
+	window.open("http://localhost:81/emumapservice/user_manual.php","_system");
 }
 
 function errordialog(newPage) {

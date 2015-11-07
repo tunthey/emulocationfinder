@@ -57,8 +57,9 @@
 		}
 		.banner {
 			display:block;
-			width: 90%;
-			height: 50%;
+			width: 40%;
+			height: 40%;
+      text-align: center;
 		
 		}
 	</style>
@@ -78,9 +79,9 @@
     </header>
 	<div data-role="content" class="content">
 		<div>
-			<p><img src="images/emu_logo.jpg" class="banner"></p>
+			<p align="center"><img src="images/emu_logo_clean.png" class="banner"></p>
 			<a href="#where_am_i" class="ui-btn ui-corner-all" onclick="where_im_i()">Where am I?</a>
-      <a href="#find_location" class="ui-btn ui-corner-all">Find Location</a>
+      <a href="#find_location" class="ui-btn ui-corner-all" onclick="getmp()">Find Places</a>
       <a href="#aboutapp" class="ui-btn ui-corner-all">About App</a>
       <a href="admin.html" rel="external" class="ui-btn ui-corner-all">Admin</a>
 		</div>  
@@ -339,7 +340,7 @@
   <div id="cafeteria_details_area">
   </div>
 <button class="ui-btn" onclick="load_review_list()">View Reviews</button>
-<a href="#add_review" class="ui-btn">Add New Review</a>
+
 </div>
 </div>
 
@@ -437,6 +438,24 @@
 </div>
 
 <!--end of page-->
+
+<!-- church details page-->
+<div data-role="page" data-theme="a" id="church">
+  <header data-role="header" data-position="fixed" data-theme="a">
+     <h2>EMU Location Finder</h2>
+    <a href="#others" data-icon="carat-l" data-role="button" data-iconshadow="false">Back</a>
+    </header>
+<div data-role="content" class="content" data-theme="a">
+  
+  <h3>Church Details</h3>
+  <br>
+  <div id="church_details_area">
+  </div>
+</div>
+</div>
+
+<!--end of page-->
+
 
 
 <!-- Library details page-->
@@ -593,17 +612,19 @@
   
   <h3 align="center">Reviews</h3>
   <br>
-  <div>
+  <div id="no_review_yet"></div>
+  <div id="reviews_Avail">
 (<span id="review_count">0</span>) Reviews on this Cafeteria
 
  <div id="reviewlist" data-role="collapsible-set" data-filter="true" 
-            data-filter-placeholder="Search Reviews...">
+            data-filter-placeholder="Filter Reviews...">
                 <div data-role="collapsible">
         </div>
             </div>
             <p id="reviewloading"> Loading reviews...<img src="images/loading.gif" width="20" height="20"></p>
 
   </div>
+  <a href="#add_review" class="ui-btn">Add New Review</a>
 </div>
 </div>
 
