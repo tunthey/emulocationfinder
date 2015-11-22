@@ -1209,8 +1209,6 @@ makedirectionrequest(pos,dest,1,"direction_map_loc");
 // Try HTML5 geolocation
   
 function makedirectionrequest(pos,dest,mode,mapdiv_id){
-alert(pos);
-alert(dest);
   directionsDisplay = new google.maps.DirectionsRenderer();
   //var cyprus = new google.maps.LatLng(35.1439106, 33.909568);
   var mapOptions = {
