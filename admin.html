@@ -83,6 +83,7 @@
                 <li><a href="#manage_lecturehall">Manage Lecture Hall</a></li>
                 <li><a href="#manage_building">Manage Building</a></li>
                 <li><a href="#manage_office">Manage Office</a></li>
+                <li><a href="#manage_busstop">Manage Bus Stop</a></li>
                 <li><a href="#accountmnt">Account</a></li>
                 <li><a href="#manage_atm">Atm's</a></li>
                 <li><a href="#others">Others</a></li>
@@ -267,7 +268,7 @@
 <!-- End of cafeteria -->
 
 
-<!-- Office Management page-->
+<!-- ATM Management page-->
 <div data-role="page" data-theme="b" id="manage_atm">
 <div data-role="content" class="content">
   <br>
@@ -282,9 +283,25 @@
      </ul>
 </div>
 </div>
-<!-- End of cafeteria -->
+<!-- End of ATM Management -->
 
 
+<!-- Bus Stop Management page-->
+<div data-role="page" data-theme="b" id="manage_busstop">
+<div data-role="content" class="content">
+  <br>
+  <h1 align="center">Bus Stop Management</h1>
+  <br> <br>
+   <ul data-role="listview">
+      <li><a href="#addbusstop">Add New Bus Stop</a></li>
+      <li><a href="#" onclick="load_all_busstop()">Update Bus Stop</a></li>
+      <li><a href="#" onclick="load_all_busstop_for_delete()">Delete Bus Stop</a></li>
+                
+
+     </ul>
+</div>
+</div>
+<!-- End of Bus Stop Management -->
 
 
 <!-- Cafeteria list page-->
@@ -346,6 +363,20 @@
 
 <!--end of page-->
 
+
+<!-- Busstop list page-->
+<div data-role="page" data-theme="a" id="busstop_list">
+<div data-role="content" class="content" data-theme="b">
+  <br>
+  <h3 align="center">Select to Update</h3>
+  <br>
+  <div id="busstop_content_list">
+
+  </div>
+</div>
+</div>
+
+<!--end of page-->
 
 <!-- Building list page-->
 <div data-role="page" data-theme="a" id="building_list">
@@ -607,7 +638,26 @@
 <!--end of page-->
 
 
+<!-- Update Bus stop page-->
+<div data-role="page" data-theme="a" id="updatebusstop">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Update Bus Stop</h3></div>
+    <form id="update_busstopform" method="post" data-ajax="false">
+             <label for="upbusstop_name">Bus Stop Name:</label>
+            <input type="text" name="upbusstop_name" id="upbusstop_name" value="" required placeholder="ATM name"/>  
+           <label for="upbusstop_lat">Lat:</label>
+           <input type="text" name="upbusstop_lat" id="upbusstop_lat" required placeholder="Latitude" />
+           <label for="upbusstop_lng">Long:</label>
+           <input type="text" name="upbusstop_lng" id="upbusstop_lng" required placeholder="Longitude" />
+           <a href="#" onclick="get_busstop_position()">Click here to set your current position for lat and long</a>
+           <input type="hidden" name="update_busstop_id" id="update_busstop_id" />
+    <input type="submit" value="Update Bus Stop" />
+  </form>
 
+</div>
+</div>
+
+<!--end of page-->
 
 
 <!-- Update Building page-->
@@ -845,6 +895,30 @@
 </div>
 
 <!--end of page-->
+
+
+<!-- addbusstop page-->
+<div data-role="page" data-theme="a" id="addbusstop">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Add Bus Stop</h3></div>
+<form id="add_busstopform" method="post" data-ajax="false">
+             <label for="busstop_name">Bus Stop Name:</label>
+            <input type="text" name="busstop_name" id="busstop_name" value="" required placeholder="Bus Stop name"/>  
+           <label for="busstop_lat">Lat:</label>
+           <input type="text" name="busstop_lat" id="busstop_lat" required placeholder="Latitude" />
+           <label for="busstop_lng">Long:</label>
+           <input type="text" name="busstop_lng" id="busstop_lng" required placeholder="Longitude" />
+           <a href="#" onclick="get_busstop_position()">Click here to set your current position for lat and long</a>
+    <input type="submit" value="Add Bus Stop" />
+  </form>
+  <p id="progresspane" align="center"></p>
+</div>
+</div>
+
+<!--end of page-->
+
+
+
 
 <!-- This page will be displayed as a dialog -->
     <div id="adminerrorpage" data-role="page" data-dialog="true" data-close-btn="right" data-theme="a">

@@ -169,6 +169,7 @@
     <li><a href="#" onclick="load_gym_details()">Sport Center</a></li>
     <li><a href="#" onclick="load_church_details()">Church</a></li>
     <li><a href="#" onclick="load_mosque_details()">Mosque</a></li>
+    <li><a href="#" onclick="load_busstop_details()">Bus Stop</a></li>
   </ul>
   </div>
 </div>
@@ -594,6 +595,34 @@
         </div>
             </div>
             <p id="atmloading"> Loading ATM list...<img src="images/loading.gif" width="20" height="20"></p>
+
+  </div>
+</div>
+</div>
+
+<!--end of page-->
+
+
+
+<!-- bus stop page-->
+<div data-role="page" data-theme="a" id="busstop">
+  <header data-role="header" data-position="fixed" data-theme="a">
+     <h2>EMU Location Finder</h2>
+    <a href="#others" data-icon="carat-l" data-role="button" data-iconshadow="false">Back</a>
+    </header>
+<div data-role="content" class="content">
+  
+  <h3 align="center">BUS STOP</h3>
+  <br>
+  <div>
+(<span id="busstop_count">0</span>) Bus Stop on campus. below is their list.
+
+ <div id="busstoplist" data-role="collapsible-set" data-filter="true" 
+            data-filter-placeholder="Search Bus Stop List...">
+                <div data-role="collapsible">
+        </div>
+            </div>
+            <p id="busstoploading"> Loading Bus Stop list...<img src="images/loading.gif" width="20" height="20"></p>
 
   </div>
 </div>
