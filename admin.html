@@ -83,6 +83,7 @@
                 <li><a href="#manage_lecturehall">Manage Lecture Hall</a></li>
                 <li><a href="#manage_building">Manage Building</a></li>
                 <li><a href="#manage_office">Manage Office</a></li>
+                <li><a href="#manage_complab">Manage Computer Lab</a></li>
                 <li><a href="#manage_busstop">Manage Bus Stop</a></li>
                 <li><a href="#accountmnt">Account</a></li>
                 <li><a href="#manage_atm">Atm's</a></li>
@@ -229,6 +230,22 @@
 </div>
 <!-- End of cafeteria -->
 
+<!-- Computer Lab Management page-->
+<div data-role="page" data-theme="b" id="manage_complab">
+<div data-role="content" class="content">
+  <br>
+  <h1 align="center">Computer Lab Management</h1>
+  <br> <br>
+   <ul data-role="listview">
+      <li><a href="#addcomputerlab">Add New Computer Lab</a></li>
+      <li><a href="#" onclick="load_all_computerlab()">Update Computer Lab</a></li>
+      <li><a href="#" onclick="load_all_computerlab_for_delete()">Delete Computer Lab</a></li>
+                
+
+     </ul>
+</div>
+</div>
+<!-- End of cafeteria -->
 
 
 <!-- Building Management page-->
@@ -333,6 +350,19 @@
 
 <!--end of page-->
 
+<!-- Computer lab page-->
+<div data-role="page" data-theme="a" id="computerlab_list">
+<div data-role="content" class="content" data-theme="b">
+  <br>
+  <h3 align="center">Please Select</h3>
+  <br>
+  <div id="computerlab_content_list">
+
+  </div>
+</div>
+</div>
+
+<!--end of page-->
 
 <!-- Lecture list page-->
 <div data-role="page" data-theme="a" id="office_list">
@@ -553,6 +583,35 @@
 
 <!--end of page-->
 
+
+<!-- add COMPUTER page-->
+<div data-role="page" data-theme="a" id="addcomputerlab">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Add New Computer Lab</h3></div>
+  <p class="alert-danger" id="addcomputerlaberrordiv" data-dismiss="alert"></p>
+  <form id="add_computerlab_form" method="post" data-ajax="false">
+     <label for="computerlabname" >Computer Lab Name:</label>
+            <input type="text" name="computerlabname" id="computerlabname" value="" required placeholder="Name"/>
+            <label for="computerlab_opening_hour">Opening Hour:</label>
+            <input type="text" name="computerlab_opening_hour" id="computerlab_opening_hour" value="" required placeholder="Opening Hour"/>  
+            <label for="computerlab_closing_hour">Closing Hour:</label>
+            <input type="text" name="computerlab_closing_hour" id="computerlab_closing_hour" value="" required placeholder="Closing Hour"/> 
+             <label for="computerlab_lat">Latitude:</label>
+            <input type="text" name="computerlab_lat" id="computerlab_lat" value="" required placeholder="Latitude" />
+             <label for="computerlab_long">Longtitude:</label>
+            <input type="text" name="computerlab_long" id="computerlab_long" value="" required placeholder="Longitude" />
+           <a href="#" onclick="get_computerlab_position()">Click here to set your current position for lat and long</a>
+           <label for="computerlab_info">Brief Info:</label>
+          <textarea id="computerlab_info" name="computerlab_info" placeholder="Brief Info"></textarea>
+    <input type="submit" value="Add Computer Lab" />
+  </form>
+</div>
+</div>
+
+<!--end of page-->
+
+
+
 <!-- Update Lecture page-->
 <div data-role="page" data-theme="a" id="updatelecturehall">
 <div data-role="content" class="content">
@@ -569,11 +628,40 @@
             <input type="text" name="uplecture_lat" id="uplecture_lat" value="" required placeholder="Latitude" />
              <label for="uplecture_long">Longtitude:</label>
             <input type="text" name="uplecture_long" id="uplecture_long" value="" required placeholder="Longitude" />
-           <a href="#" onclick="get_lecturehall_position()">Click here to set your current position for lat and long</a>
+           <a href="#" onclick="get_computerlab_position()">Click here to set your current position for lat and long</a>
            <label for="uplecture_info">Brief Info:</label>
           <textarea id="uplecture_info" name="uplecture_info" placeholder="Brief Info"></textarea>
           <input type="hidden" value="" name="lecture_hall_id" id="lecture_hall_id" />
     <input type="submit" value="Update Lecture Hall" />
+  </form>
+</div>
+</div>
+
+<!--end of page-->
+
+
+
+<!-- Update Computer Lab page-->
+<div data-role="page" data-theme="a" id="updatecomputerlab">
+<div data-role="content" class="content">
+  <div align="center"><br><h3>Update Computer Lab</h3></div>
+  <p class="alert-danger" id="computerlaberrordiv" data-dismiss="alert"></p>
+  <form id="update_computerlab_form" method="post" data-ajax="false">
+     <label for="upcomputerlabname" >Computer Lab Name:</label>
+            <input type="text" name="upcomputerlabname" id="upcomputerlabname" value="" required placeholder="Name"/>
+            <label for="upcomputerlab_opening_hour">Opening Hour:</label>
+            <input type="text" name="upcomputerlab_opening_hour" id="upcomputerlab_opening_hour" value="" required placeholder="Opening Hour"/>  
+            <label for="upcomputerlab_closing_hour">Closing Hour:</label>
+            <input type="text" name="upcomputerlab_closing_hour" id="upcomputerlab_closing_hour" value="" required placeholder="Closing Hour"/> 
+             <label for="upcomputerlab_lat">Latitude:</label>
+            <input type="text" name="upcomputerlab_lat" id="upcomputerlab_lat" value="" required placeholder="Latitude" />
+             <label for="upcomputerlab_long">Longtitude:</label>
+            <input type="text" name="upcomputerlab_long" id="upcomputerlab_long" value="" required placeholder="Longitude" />
+           <a href="#" onclick="get_lecturehall_position()">Click here to set your current position for lat and long</a>
+           <label for="upcomputerlab_info">Brief Info:</label>
+          <textarea id="upcomputerlab_info" name="upcomputerlab_info" placeholder="Brief Info"></textarea>
+          <input type="hidden" value="" name="computerlab_id" id="computerlab_id" />
+    <input type="submit" value="Update Computer Lab" />
   </form>
 </div>
 </div>

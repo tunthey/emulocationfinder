@@ -1549,6 +1549,51 @@ $("form#add_busstopform").submit(function(){
             });
 
 
+             $("form#add_computerlab_form").submit(function(){
+                console.log("uploading...");
+                var formData = new FormData($(this)[0]);
+                console.log(formData);
+                $.mobile.loading('show', {
+                 theme: "a",
+                 text: "Processing Request, Please wait...",
+                 textonly: true,
+                 textVisible: true
+                    });
+                $.ajax({
+                    url: 'http://location.falcontechng.com/add_computerlab.php',
+                    type: 'POST',
+                    data: formData,
+                   // async: false,
+                    success: function (data) {
+                        console.log(data);
+                        var response = data.response;
+                        var message = data.message;
+                        $.mobile.loading('hide');
+                        if(response==='error')
+                        {
+                           alert(message);
+                        }
+                        else
+                        {
+                           goto_sucess('#adminsuccesspage',message);
+                        document.getElementById("add_computerlab_form").reset();
+                        }
+
+                    },
+                    error: function(data){
+                         console.log(data);
+                         $.mobile.loading('hide');
+                         redirect_to('#adminerrorpage');
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                });
+
+                return false;
+            });
+
+
               $("form#upload_staffphoto").submit(function(){
                 var formData = new FormData($(this)[0]);
                 console.log(formData);
@@ -2178,6 +2223,48 @@ $("form#upload_libraryphoto").submit(function(){
 
 
 
+    $("form#update_computerlab_form").submit(function(){
+                var formData = new FormData($(this)[0]);
+                console.log(formData);
+                $.mobile.loading('show', {
+                 theme: "a",
+                 text: "Processing Request, Please wait...",
+                 textonly: true,
+                 textVisible: true
+                    });
+                $.ajax({
+                    url: 'http://location.falcontechng.com/update_computerlab.php',
+                    type: 'POST',
+                    data: formData,
+                   // async: false,
+                    success: function (data) {
+                        console.log(data);
+                        var response = data.response;
+                        var message = data.message;
+                        var imgpath =data.imgpath;
+                        $.mobile.loading('hide');
+                        if(response==='error')
+                        {
+                           alert(message);
+                        }
+                        else
+                           goto_sucess('#adminsuccesspage',message);
+                        
+                    },
+                    error: function(data){
+                         console.log(data);
+                         $.mobile.loading('hide');
+                         redirect_to('#adminerrorpage');
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                    });
+                return false;
+            });
+
+
+
     $("form#update_library_form").submit(function(){
                 var formData = new FormData($(this)[0]);
                 console.log(formData);
@@ -2634,6 +2721,15 @@ function get_lecturehall_position(){
     return false;
 }
 
+function get_computerlab_position(){
+    getcurrrentlatlog();
+    $('#computerlab_lat').val(my_location_lat);
+    $('#computerlab_long').val(my_location_lnt);
+    $('#upcomputerlab_lat').val(my_location_lat);
+    $('#upcomputerlab_long').val(my_location_lnt);
+    return false;
+}
+
 function get_library_position(){
     getcurrrentlatlog();
     $('#library_lat').val(my_location_lat);
@@ -2700,6 +2796,49 @@ function load_all_lecture_for_delete(){
 
             });
 }
+
+
+
+function load_all_computerlab_for_delete(){
+     var dataurl = 'http://location.falcontechng.com/list_all_computer_lab.php';
+    $.ajax({
+                url: dataurl,
+                //timeout: 5000,
+                beforeSend: function() {
+                $.mobile.loading('show', {
+                 theme: "a",
+                 text: "Processing Request... please wait",
+                 textonly: true,
+                 textVisible: true
+                    });
+                },
+                error: function(jqXHR, textStatus) {
+                    console.log(textStatus);
+                    $.mobile.loading('hide');
+                    redirect_to('#errorpage');
+                },
+
+                fail: function(jqXHR, textStatus, errorThrown){
+                    $.mobile.loading('hide');
+                    console.log(textStatus);
+                    redirect_to('#errorpage');
+                },
+
+                success: function (jsondata) {
+                    $.mobile.loading('hide');
+                    $('#computerlab_content_list').html('<ul data-theme="b" data-role="listview">');
+                       for (var i = 0; i < jsondata.length; i++) {
+                       $('#computerlab_content_list').append('<li data-theme="b"><a href="#" onclick="delete_computer_lab('+jsondata[i].computer_lab.id+')">'+jsondata[i].computer_lab.name+'</a></li>');
+                       }
+                       $('#computerlab_content_list').append('</ul>');
+                         $('#computerlab_content_list').listview({filter: true}).listview('refresh');
+                    redirect_to('#computerlab_list');
+                }
+
+            });
+}
+
+
 
 function load_all_atm_for_delete(){
      var dataurl = 'http://location.falcontechng.com/list_all_atm.php';
@@ -3047,6 +3186,54 @@ function delete_lecture(id){
 }
 
 
+function delete_computer_lab(id){
+ var r = confirm("Are You Sure You want to delete this Computer Lab?");
+    if (r == true) {
+        $.mobile.loading('show', {
+                 theme: "a",
+                 text: "Processing Request, Please wait...",
+                 textonly: true,
+                 textVisible: true
+                    });
+     $.ajax({
+        type:'GET',
+        url: 'http://location.falcontechng.com/delete_computer_lab.php?id=' + id,
+
+        success:function(data){
+            console.log(data);
+            var response = data.response;
+            var message = data.message;
+            $.mobile.loading('hide');
+            if(response==='error')
+            {
+               alert(message);
+            }
+            else
+            {
+               goto_sucess('#adminsuccesspage',message);
+               redirect_to('#manage_complab');
+            }
+
+        },
+
+        fail:function(data){
+        console.log(data);
+        $.mobile.loading('hide');
+        redirect_to('#adminerrorpage');
+        },
+
+        error: function(data){
+           console.log(data);
+           $.mobile.loading('hide');
+           redirect_to('#adminerrorpage');
+        }
+    });
+
+    }  
+}
+
+
+
 function delete_atm(id){
  var r = confirm("Are You Sure You want to delete this ATM ?");
     if (r == true) {
@@ -3310,6 +3497,47 @@ function load_all_lecture(){
 }
 
 
+
+function load_all_computerlab(){
+    var dataurl = 'http://location.falcontechng.com/list_all_computer_lab.php';
+    $.ajax({
+                url: dataurl,
+                //timeout: 5000,
+                beforeSend: function() {
+                $.mobile.loading('show', {
+                 theme: "a",
+                 text: "Processing Request... please wait",
+                 textonly: true,
+                 textVisible: true
+                    });
+                },
+                error: function(jqXHR, textStatus) {
+                    console.log(textStatus);
+                    $.mobile.loading('hide');
+                    redirect_to('#errorpage');
+                },
+
+                fail: function(jqXHR, textStatus, errorThrown){
+                    $.mobile.loading('hide');
+                    console.log(textStatus);
+                    redirect_to('#errorpage');
+                },
+
+                success: function (jsondata) {
+                    $.mobile.loading('hide');
+                    $('#computerlab_content_list').html('<ul data-theme="b" data-role="listview">');
+                       for (var i = 0; i < jsondata.length; i++) {
+                       $('#computerlab_content_list').append('<li data-theme="b"><a href="#" onclick="load_computerlab_details('+jsondata[i].computer_lab.id+')">'+jsondata[i].computer_lab.name+'</a></li>');
+                       }
+                       $('#computerlab_content_list').append('</ul>');
+                         $('#computerlab_content_list').listview({filter: true}).listview('refresh');
+                    redirect_to('#computerlab_list');
+                }
+
+            });
+}
+
+
 function load_all_office(){
     var dataurl = 'http://location.falcontechng.com/list_all_office.php';
     $.ajax({
@@ -3551,6 +3779,52 @@ function load_lecture_details(id){
 
             });
 }
+
+
+
+function load_computerlab_details(id){
+    var dataurl = 'http://location.falcontechng.com/get_computer_details.php?id='+id;
+    $.ajax({
+                url: dataurl,
+                //timeout: 5000,
+                beforeSend: function() {
+                $.mobile.loading('show', {
+                 theme: "a",
+                 text: "Loading Computer Lab Details.. please wait",
+                 textonly: true,
+                 textVisible: true
+                    });
+                },
+                error: function(jqXHR, textStatus) {
+                    console.log(textStatus);
+                    $.mobile.loading('hide');
+                    redirect_to('#errorpage');
+                },
+
+                fail: function(jqXHR, textStatus, errorThrown){
+                    $.mobile.loading('hide');
+                    console.log(textStatus);
+                    redirect_to('#errorpage');
+                },
+
+                success: function (jsondata) {
+                    $.mobile.loading('hide');
+                       for (var i = 0; i < jsondata.length; i++) { 
+                        $('#upcomputerlabname').val(jsondata[i].computer_lab.name);
+                        $('#upcomputerlab_opening_hour').val(jsondata[i].computer_lab.opening_hour);
+                        $('#upcomputerlab_closing_hour').val(jsondata[i].computer_lab.closing_hour);
+                        $('#upcomputerlab_lat').val(jsondata[i].computer_lab.lat);
+                        $('#upcomputerlab_long').val(jsondata[i].computer_lab.lng);
+                        $('#upcomputerlab_info').val(jsondata[i].computer_lab.brief_info);
+                        $('#computerlab_id').val(id);
+                        }
+                    redirect_to('#updatecomputerlab');
+                }
+
+
+            });
+}
+
 
 
 function load_office_details(id){
